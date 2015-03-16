@@ -1,2 +1,8 @@
 ---
+sabnzbd_pkgs:
+  - 'par2cmdline'
+  - 'pyOpenSSL'
+  - 'python-cheetah'
+  - 'unrar'
+  - 'unzip'
 sabnzbd_version: 0.7.20

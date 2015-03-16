@@ -1,0 +1,6 @@
+--- 
+- name: Get Repoforge rpm key installed
+  rpm_key: state=present key=http://apt.sw.be/RPM-GPG-KEY.dag.txt
+
+- name: Get Repoforge yum repo boostrapped
+  yum: name=http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm

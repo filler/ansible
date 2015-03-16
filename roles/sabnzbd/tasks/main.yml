@@ -1,6 +1,7 @@
 ---
 - name: Satisfy SABnzbd deps
-  yum: name=python-cheetah
+  yum: name={{ item }}
+  with_items: sabnzbd_pkgs
   
 - name: Fetch SABNzbd code
   git: repo=https://github.com/sabnzbd/sabnzbd.git

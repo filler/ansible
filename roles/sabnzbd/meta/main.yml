@@ -1,4 +1,6 @@
 ---
 dependencies: 
+  -  { role : epel       }
+  -  { role : repoforge  }
   -  { role : git-client }
   -  { role : runit      }
