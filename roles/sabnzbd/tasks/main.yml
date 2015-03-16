@@ -11,6 +11,9 @@
 - name: Prepare SABnzbd config directory
   file: name=/opt/sabnzbd-config owner=nobody mode=0700 state=directory
 
+- name: Prepare SABnzbd download directory
+  file: name=/opt/sabnzbd-download owner=nobody state=directory
+
 - name: Prepare SABnzbd runit directory
   file: name=/etc/service/sabnzbd/ state=directory
 
