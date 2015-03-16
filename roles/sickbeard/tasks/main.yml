@@ -1,0 +1,23 @@
+---
+- name: Fetch Sick-Beard code
+  git: repo=https://github.com/midgetspy/Sick-Beard.git
+       dest=/opt/sickbeard
+       version={{ sickbeard_version }}
+
+- name: Prepare Sick-Beard config directory
+  file: name=/opt/sickbeard-config owner=nobody mode=0700 state=directory
+
+- name: Prepare Sick-Beard runit directory
+  file: name=/etc/service/sickbeard/ state=directory
+
+- name: Prepare Sick-Beard log directory destination
+  file: name=/var/log/sickbeard/ state=directory
+
+- name: Prepare Sick-Beard log directory config
+  file: name=/etc/service/sickbeard/log/ state=directory
+
+- name: Setup Sick-Beard to log via runit
+  template: src=log.j2 dest=/etc/service/sickbeard/log/run mode=0744
+
+- name: Setup Sick-Beard to run via runit
+  template: src=run.j2 dest=/etc/service/sickbeard/run mode=0744

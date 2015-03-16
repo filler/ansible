@@ -1,0 +1,13 @@
+---
+- name: Install deps
+  yum: name=cifs-utils
+
+- name: Create storage mount point
+  file: name=/mnt/plex state=directory
+
+- name: Get external storage mounted up
+  mount: |
+         name=/mnt/plex
+         src=//Drobo5N/plex
+         fstype=cifs opts=guest,ip=192.168.1.20,iocharset=utf8,file_mode=0777,dir_mode=0777
+         state=mounted

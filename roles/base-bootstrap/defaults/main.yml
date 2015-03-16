@@ -1,0 +1,11 @@
+---
+base_bootstrap_pkgs: 
+  - 'docker-io'
+  - 'htop'
+  - 'man'
+  - 'mlocate'
+  - 'nc'
+  - 'nmap'
+  - 'screen'
+  - 'tmux'
+  - 'vim'

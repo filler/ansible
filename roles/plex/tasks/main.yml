@@ -1,0 +1,6 @@
+---
+- name: Install plexmediaserver package
+  yum: name=https://downloads.plex.tv/plex-media-server/{{ plex_version }}/plexmediaserver-{{ plex_version }}.x86_64.rpm
+
+- name: Start plexmediaserver
+  service: name=plexmediaserver state=started enabled=yes

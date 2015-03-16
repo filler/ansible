@@ -1,0 +1,23 @@
+---
+- name: Fetch CouchPotato code
+  git: repo=https://github.com/RuudBurger/CouchPotatoServer.git
+       dest=/opt/couchpotato
+       version={{ couchpotato_version }}
+
+- name: Prepare CouchPotato config directory
+  file: name=/opt/couchpotato-config owner=nobody mode=0700 state=directory
+
+- name: Prepare CouchPotato runit directory
+  file: name=/etc/service/couchpotato/ state=directory
+
+- name: Prepare CouchPotato log directory destination
+  file: name=/var/log/couchpotato/ state=directory
+
+- name: Prepare CouchPotato log directory config
+  file: name=/etc/service/couchpotato/log/ state=directory
+
+- name: Setup CouchPotato to log via runit
+  template: src=log.j2 dest=/etc/service/couchpotato/log/run mode=0744
+
+- name: Setup CouchPotato to run via runit
+  template: src=run.j2 dest=/etc/service/couchpotato/run mode=0744

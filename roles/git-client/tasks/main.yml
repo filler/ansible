@@ -1,0 +1,14 @@
+---
+- name: Prep ~/.ssh/
+  file: state=directory path=/root/.ssh mode=0700
+
+- name: Fetch github.com host key
+  lineinfile:
+    dest: /root/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+- name: Install git client packages
+  yum: name=git

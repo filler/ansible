@@ -1,0 +1,9 @@
+---
+- name: Set packagecloud.io rpm imported
+  rpm_key: state=present key=https://packagecloud.io/gpg.key
+
+- name: Setup packagecloud.io yum repo
+  template: src=imeyer_runit.repo.j2 dest=/etc/yum.repos.d/imeyer_runit.repo
+
+- name: Get runit installed
+  yum: name=runit

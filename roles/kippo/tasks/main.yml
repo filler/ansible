@@ -1,0 +1,51 @@
+---
+- name: Update packages
+  yum: name=* state=latest
+
+- name: Install one-off packages
+  yum: name={{ item }} state=present
+  with_items:
+    - git
+    - vim
+    - python-twisted-core
+    - python-crypto2.6
+    - python-twisted-conch
+    - python-twisted-web
+
+- name: Setup kippo user
+  user: name=kippo comment="Kippo User" 
+
+- name: Setup kippo basedir
+  file: path=/opt/kippo state=directory group=kippo owner=kippo mode=0755
+
+- name: Clone kippo code
+  git: repo=https://github.com/desaster/kippo.git
+    dest=/opt/kippo
+    force=yes
+
+- name: Configure /etc/ssh/sshd_config
+  template: src=etc/ssh/sshd_config.j2
+    dest=/etc/ssh/sshd_config
+# need notify
+
+- name: Enable net.ipv4.ip_forward
+  sysctl: name=net.ipv4.ip_forward value=1 
+
+- name: Kill vendor iptables
+  service: name=iptables state=stopped
+
+# http://www.hashbangcode.com/blog/adding-iptables-rules-ansible is one option
+# http://idolinux.blogspot.com/2010/07/redirect-port-with-iptables-on-red-hat.html
+- name: Configure iptables
+  command: /sbin/iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j REDIRECT --to-port 2222 -m comment --comment "Kippo-Forward-SSH"
+
+- name: Save iptables ruleset
+  command: /sbin/iptables-save
+
+- name: Setup kippo.cfg
+  template: src=opt/kippo/kippo.cfg.j2
+    dest=/opt/kippo/kippo.cfg
+
+- name: Setup data/userdb.txt
+  template: src=opt/kippo/data/userdb.txt.j2
+    dest=/opt/kippo/data/userdb.txt

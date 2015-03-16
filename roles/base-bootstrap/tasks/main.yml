@@ -1,0 +1,4 @@
+---
+- name: Get all the misc things we love installed
+  yum: name={{ item }}
+  with_items: base_bootstrap_pkgs

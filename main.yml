@@ -1,0 +1,23 @@
+---
+- hosts: all
+  sudo: true
+  vars_files:
+    - vars.yml
+    - private_vars.yml
+
+  roles:
+  - { role: selinux,        tags: [ 'selinux'           ] }
+  - { role: firewall,       tags: [ 'firewall'          ] }
+  - { role: epel,           tags: [ 'epel'              ] }
+  - { role: base-bootstrap, tags: [ 'base-bootstrap'    ] }
+  - { role: git-client,     tags: [ 'git-client'        ] }
+  - { role: runit,          tags: [ 'runit'             ] }
+  - { role: hostname,       tags: [ 'hostname'          ] }
+  - { role: mount,          tags: [ 'mount'             ] }
+  - { role: plex,           tags: [ 'plex'              ] }
+  - { role: sabnzbd,        tags: [ 'sabnzbd'           ] }
+  - { role: sickbeard,      tags: [ 'sickbeard'         ] }
+#  - { role: sonarr,         tags: [ 'sonarr'            ] }
+  - { role: couchpotato,    tags: [ 'couchpotato'       ] }
+
+# vim:ft=ansible:

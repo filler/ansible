@@ -1,0 +1,26 @@
+---
+- name: Satisfy SABnzbd deps
+  yum: name=python-cheetah
+  
+- name: Fetch SABNzbd code
+  git: repo=https://github.com/sabnzbd/sabnzbd.git
+       dest=/opt/sabnzbd
+       version={{ sabnzbd_version }}
+
+- name: Prepare SABnzbd config directory
+  file: name=/opt/sabnzbd-config owner=nobody mode=0700 state=directory
+
+- name: Prepare SABnzbd runit directory
+  file: name=/etc/service/sabnzbd/ state=directory
+
+- name: Prepare SABnzbd log directory destination
+  file: name=/var/log/sabnzbd/ state=directory
+
+- name: Prepare SABnzbd log directory config
+  file: name=/etc/service/sabnzbd/log/ state=directory
+
+- name: Setup SABnzbd to log via runit
+  template: src=log.j2 dest=/etc/service/sabnzbd/log/run mode=0744
+
+- name: Setup SABnzbd to run via runit
+  template: src=run.j2 dest=/etc/service/sabnzbd/run mode=0744

@@ -1,0 +1,26 @@
+---
+- name: Satisfy Sonarr deps
+  yum: name=mono-core
+
+- name: Fetch Sonarr code
+  git: repo=https://github.com/Sonarr/Sonarr.git
+       dest=/opt/sonarr
+       version={{ sonarr_version }}
+
+- name: Prepare Sonarr config directory
+  file: name=/opt/sonarr-config owner=nobody mode=0700 state=directory
+
+- name: Prepare Sonarr runit directory
+  file: name=/etc/service/sonarr/ state=directory
+
+- name: Prepare Sonarr log directory destination
+  file: name=/var/log/sonarr/ state=directory
+
+- name: Prepare Sonarr log directory config
+  file: name=/etc/service/sonarr/log/ state=directory
+
+- name: Setup Sonarr to log via runit
+  template: src=log.j2 dest=/etc/service/sonarr/log/run mode=0744
+
+- name: Setup Sonarr to run via runit
+  template: src=run.j2 dest=/etc/service/sonarr/run mode=0744
