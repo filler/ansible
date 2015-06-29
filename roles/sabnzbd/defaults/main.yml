@@ -1,5 +1,6 @@
 ---
 sabnzbd_pkgs:
+  - 'p7zip'
   - 'par2cmdline'
   - 'pyOpenSSL'
   - 'python-cheetah'
