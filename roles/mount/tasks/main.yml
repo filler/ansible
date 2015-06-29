@@ -9,5 +9,5 @@
   mount: |
          name=/mnt/plex
          src=//Drobo5N/plex
-         fstype=cifs opts=guest,ip=192.168.1.20,iocharset=utf8,file_mode=0777,dir_mode=0777
+         fstype=cifs opts=mapchars,guest,ip=192.168.1.20,iocharset=utf8,file_mode=0777,dir_mode=0777
          state=mounted
