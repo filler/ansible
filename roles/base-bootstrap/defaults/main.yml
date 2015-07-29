@@ -2,6 +2,7 @@
 base_bootstrap_pkgs: 
   - 'docker-io'
   - 'htop'
+  - 'lsof'
   - 'man'
   - 'mlocate'
   - 'nc'
