@@ -1,5 +1,6 @@
 ---
 base_bootstrap_pkgs: 
+  - 'bind-utils'
   - 'docker-io'
   - 'htop'
   - 'lsof'
