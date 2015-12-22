@@ -1,0 +1,8 @@
+---
+- hosts: all
+  sudo: true
+
+  roles:
+  - { role: cowrie,         tags: [ 'cowrie'            ] }
+
+# vim:ft=ansible:
